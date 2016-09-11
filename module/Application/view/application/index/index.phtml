@@ -1,5 +1,6 @@
 <a href="/create">Adicionar cerveja</a>
 <br>
 <?php foreach ($beers as $beer): ?>
-    <?php echo $beer->name;?> <br>
-<?php endforeach;?>
+    <?php echo $beer->name." <a href='".$this->url('editar',array('id'=>$beer->id))."'>editar</a>"
+            . " <a href='".$this->url("excluir",array("id"=>$beer->id))."'>excluir</a><br>"; ?>
+<?php endforeach;

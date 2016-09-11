@@ -11,6 +11,8 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Application\Model\Beer;
+use Application\Model\BeerTableGateway;
 
 class IndexController extends AbstractActionController
 {
@@ -30,7 +32,25 @@ class IndexController extends AbstractActionController
 
         return new ViewModel(['beerForm' => $form]);
     }
+    public function editarAction()
+    {
+        $id = $this->params('id');
+        $tableGateway = $this->getServiceLocator()->get('Application\Model\BeerTableGateway');
+        $model = $tableGateway->get($id);
+        $form = $this->getServiceLocator()->get('Application\Form\Beer');
+        $form->setAttribute('action', '/insert');
+        $form->bind($model);
+        $form->get('send')->setAttribute('value', 'Editar');
 
+        return new ViewModel(['beerForm' => $form]);
+    }
+    public function excluirAction()
+    {
+        $id = $this->params('id');
+        $tableGateway = $this->getServiceLocator()->get('Application\Model\BeerTableGateway');
+        $tableGateway->delete($id);
+        return $this->redirect()->toUrl('/');        
+    }
     public function insertAction()
     {
         $form = $this->getServiceLocator()->get('Application\Form\Beer');

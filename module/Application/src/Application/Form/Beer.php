@@ -19,6 +19,13 @@ class Beer extends Form
             'type'  => 'Text',
         ]);
         $this->add([
+            'name' => 'id',
+            'options' => [
+                'label' => 'Id',
+            ],
+            'type'  => 'Text',
+        ]);
+        $this->add([
             'name' => 'style',
             'options' => [
                 'label' => 'Beer style',
